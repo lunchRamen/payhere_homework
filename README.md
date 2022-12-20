@@ -1,12 +1,18 @@
 # 페이히어 과제 프로젝트입니다.
 
 - 개발환경과 배포환경을 분리하였습니다.
-    - 개발환경의 경우 Django와 sqlite3로 간편한 확인 및 테스트를 진행하도록 하였습니다
-        - 개발환경에서 서버를 실행하고 싶은 경우, python backend/manage.py runserver를 실행합니다
+    - 개발환경과 배포환경 모두 Django와 Mysql:5.7로 구현 및 테스트를 진행하도록 하였습니다
+        - 개발환경에서 서버를 실행하고 싶은 경우
+            - backend/mysql_settings.py파일을 만들고, 개인 mysql 서버 설정을 설정합니다.
+            - python backend/manage.py makemigrations, python backend/manage.py migrate를 진행합니다.
+            - python backend/manage.py runserver로 서버를 실행합니다.
         - 개발환경에서 테스트를 진행하고 싶은 경우,
-    - 배포환경의 경우 Django와 Mysql:5.7로 docker-compose 형태로 서버를 구축하였습니다.
+
         - 배포환경에서 서버를 실행하고 싶은 경우, docker-compose up --build를 실행합니다.
         - 배포환경에서 테스트를 진행하고 싶은 경우,
+
+
+- 일정한 코드 컨벤션을 유지하기 위해, flake8과 isort를 이용해 PEP8기반의 코드 컨벤션을 유지하였습니다.
 
 
 
@@ -25,9 +31,11 @@
 
 
 - 개발 API
-    - users/signup (POST) -> 회원가입
-    - users/login (GET) -> 로그인
-    - users/logout (GET) -> 로그아웃
+    - default url : api/
+
+    - users/signup (POST) -> 회원가입 [o]
+    - users/login (GET) -> 로그인 [o]
+    - users/logout (GET) -> 로그아웃 [o]
 
     - users/accountbook (GET) -> user가 만든 가계부 리스트 반환.
     - users/accountbook (POST) -> user의 가계부 생성
@@ -39,6 +47,8 @@
 
 - 테스트 API
     - 회원가입 성공/실패
+        - 이메일 형식 성공/실패
+        - 패스워드 형식 성공/실패
     - 로그인 성공/실패
     - 로그아웃 성공
 
