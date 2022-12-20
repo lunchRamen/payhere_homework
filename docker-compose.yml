@@ -1,0 +1,39 @@
+version: '3'
+
+
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - /var/lib/mysql/data
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=payheredb
+      - MYSQL_USER=root
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+
+  server:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - DJANGO_DEBUG=True
+      - DJANGO_DB_HOST=db
+      - DJANGO_DB_PORT=3306
+      - DJANGO_DB_NAME=payheredb
+      - DJANGO_DB_USERNAME=root
+      - DJANGO_DB_PASSWORD=1234
+      - DJANGO_SECRET_KEY=django-insecure-1^!-*md0kpo^n6&dv!5ik*x4)!41fy^#3^yq!i9)hbal&ie*gk
+    ports:
+      - "8000:8000"
+    command: 
+      - bash
+      - -c
+      - |
+        python manage.py runserver 0.0.0.0:8000 --noreload
+    volumes:
+      - ./backend:/srv/server
