@@ -14,7 +14,7 @@ class MoneyNull(APIException):
     code = "MONEY_NULL"
 
 
-class AlreadyTerminated(APIException):
+class MoneyZero(APIException):
     status_code = status.HTTP_400_BAD_REQUEST
-    default_detail = "ALREADY_TERMINATED"
-    default_code = "ALREADY_TERMINATED"
+    default_detail = "돈은 0원이 넘게 입력해주세요."
+    default_code = "NOT_ALLOW_MONEY_0"

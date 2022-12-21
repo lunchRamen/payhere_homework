@@ -16,7 +16,7 @@ class AccountBookViewSet(ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_serializer_class(self):
-        if self.action == 'test':
+        if self.action == 'list':
             return AccountBookListSerializer
         elif self.action == 'retrieve':
             return AccountBookGetSerializer
@@ -39,6 +39,8 @@ class AccountBookViewSet(ModelViewSet):
     def create(self,request,*args,**kwargs):
         if request.data.get('money') == '':
             raise MoneyNull
+        elif request.data.get('money') == '0':
+            raise MoneyZero
             
         user_id = self.get_user_id(request)
         data = {
@@ -50,4 +52,14 @@ class AccountBookViewSet(ModelViewSet):
         serializer.is_valid(raise_exception = True)
         self.perform_create(serializer)
         return Response(serializer.data, status = status.HTTP_201_CREATED)
+    
+    def list(self,request,*args,**kwargs):
+        user_id = self.get_user_id(request)
+        queryset = AccountBook.objects.filter(user__id = user_id)
+        serializer = self.get_serializer(queryset, many = True)
+        
+        return Response(serializer.data, status = status.HTTP_200_OK)
+        
+
+    
         
