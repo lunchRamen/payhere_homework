@@ -1,10 +1,8 @@
-from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from .models import AccountBook,User
+from .models import AccountBook
 from rest_framework.response import Response
-from rest_framework import status,permissions,authentication
+from rest_framework import status,permissions
 import jwt
-from rest_framework.exceptions import APIException
 from django.conf import settings
 from .account_book_serializer import *
 from .exceptions import *
@@ -58,6 +56,12 @@ class AccountBookViewSet(ModelViewSet):
         queryset = AccountBook.objects.filter(user__id = user_id)
         serializer = self.get_serializer(queryset, many = True)
         
+        return Response(serializer.data, status = status.HTTP_200_OK)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+
         return Response(serializer.data, status = status.HTTP_200_OK)
         
 

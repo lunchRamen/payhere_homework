@@ -10,7 +10,6 @@ class AccountBookGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = AccountBook
         fields = '__all__'
-
 class AccountBookCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = AccountBook

@@ -9,7 +9,7 @@ urlpatterns = [
         name="accountbooks",
     ),
     path(
-        'accountbook/<int:accountbook_id>',
+        'accountbook/<int:pk>',
         AccountBookViewSet.as_view({'patch':'update', 'get':'retrieve', 'delete':'destroy'}),
         name = "accountbook",
     ),

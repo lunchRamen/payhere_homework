@@ -37,8 +37,8 @@
     - users/login (GET) -> 로그인 [o]
     - users/logout (GET) -> 로그아웃 [o]
 
-    - users/accountbook (GET) -> user가 만든 가계부 리스트 반환.
-    - users/accountbook (POST) -> user의 가계부 생성
+    - users/accountbook (GET) -> user가 만든 가계부 리스트 반환. [o]
+    - users/accountbook (POST) -> user의 가계부 생성 [o]
     - users/accountbook/{accountbook_id} (GET) -> user의 accountbook_id 가계부 조회
     - users/accountbook/{accountbook_id} (PATCH) -> user의 accountbook_id 가계부 수정
     - users/accountbook/{accountbook_id} (DELETE) -> user의 accountbook_id 가계부 삭제
@@ -46,15 +46,15 @@
     - users/accountbook/{accountbook_id}/url (GET) -> user의 account_id 가계부를 볼수 있는 url링크 조회. (url링크는 특정시간 후 만료.)
 
 - 테스트 API
-    - 회원가입 성공/실패
-        - 이메일 형식 성공/실패
-        - 패스워드 형식 성공/실패
-    - 로그인 성공/실패
-    - 로그아웃 성공
+    - 회원가입 성공/실패 [o]
+        - 이메일 형식 성공/실패 [o]
+        - 패스워드 형식 성공/실패 [o]
+    - 로그인 성공/실패 [o]
+    - 로그아웃 성공 [o]
     - access_token 시간 이후, 인증상태가 아닌것에 대한 테스트.
 
-    - 가계부 생성 성공/실패
-    - 가계부 리스트 조회
+    - 가계부 생성 성공/실패 [o]
+    - 가계부 리스트 조회 [o]
     - 특정 가계부 조회 성공/실패
     - 특정 가계부 수정 성공/실패
     - 특정 가계부 삭제 성공/실패
