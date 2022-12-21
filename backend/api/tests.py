@@ -131,3 +131,7 @@ class AccountBookTestCase(APITestCase):
         res = self.client.post(reverse('accountbooks'),data)
         self.assertEqual(res.status_code, 400)
         self.assertEqual(res.data.get("detail"), "돈은 0원이 넘게 입력해주세요.")
+    
+    def test_유저_가계부_리스트_성공(self):
+        res = self.client.get(reverse('accountbooks'))
+        self.assertEqual(res.status_code, 200)
