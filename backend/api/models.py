@@ -22,8 +22,16 @@ class User(AbstractUser):
     def __str__(self):
         return self.email
 
-# class AccountBook(models.Model):
-#     money = models.IntegerField()
-#     memo = models.TextField()
-#     created_at = models.DateTimeField()
-#     updated_at = models.DateTimeField()
+class AccountBook(models.Model):
+    user = models.ForeignKey(User, on_delete= models.CASCADE)
+
+    money = models.IntegerField(
+        verbose_name="오늘 사용한 돈의 금액"
+    )
+    memo = models.TextField(
+        verbose_name="돈에 대한 코멘트",
+        null=True,
+        blank=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
