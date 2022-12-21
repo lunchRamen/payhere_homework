@@ -135,3 +135,27 @@ class AccountBookTestCase(APITestCase):
     def test_유저_가계부_리스트_성공(self):
         res = self.client.get(reverse('accountbooks'))
         self.assertEqual(res.status_code, 200)
+    
+    def test_유저_특정_가계부_조회_성공(self):
+        def do_유저_가계부_더미데이터_생성():
+            data = {
+                "money": 1000,
+                "memo": "test",
+            }
+            res = self.client.post(reverse('accountbooks'),data)
+            return res.data
+        do_유저_가계부_더미데이터_생성()
+        res = self.client.get('http://127.0.0.1:8000/api/accountbook/',{"pk":1})
+        self.assertEqual(res.status_code , 200)
+    
+    def test_유저_특정_가계부_조회_실패(self):
+        def do_유저_가계부_더미데이터_생성():
+            data = {
+                "money": 1000,
+                "memo": "test",
+            }
+            res = self.client.post(reverse('accountbooks'),data)
+            return res.data
+        do_유저_가계부_더미데이터_생성()
+        res = self.client.get('http://127.0.0.1:8000/api/accountbook/',{"pk":2})
+        self.assertEqual(res.status_code , 200)
