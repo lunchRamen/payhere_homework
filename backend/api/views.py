@@ -37,8 +37,9 @@ class AccountBookViewSet(ModelViewSet):
 
 
     def create(self,request,*args,**kwargs):
-        if request.data.get('money') is None:
+        if request.data.get('money') == '':
             raise MoneyNull
+            
         user_id = self.get_user_id(request)
         data = {
             'money': request.data.get('money'),
