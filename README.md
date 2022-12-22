@@ -45,7 +45,7 @@
     - users/accountbook/{accountbook_id} (PATCH) -> user의 accountbook_id 가계부 수정 [o]
     - users/accountbook/{accountbook_id} (DELETE) -> user의 accountbook_id 가계부 삭제 [o]
     - users/accountbook/{accountbook_id}/copy (POST) -> user의 accountbook_id 데이터와 동일한 가계부 복제 후 저장. [o]
-    - users/accountbook/{accountbook_id}/url (GET) -> user의 account_id 가계부를 볼수 있는 url링크 조회. (url링크는 특정시간 후 만료.)
+    - users/accountbook/{accountbook_id}/url (GET) -> user의 account_id 가계부를 볼수 있는 url링크 조회. (url링크는 특정시간 후 만료.) [o]
 
 - 테스트 API
     - 회원가입 성공/실패 [o]
@@ -61,4 +61,4 @@
     - 특정 가계부 수정 성공/실패 [o]
     - 특정 가계부 삭제 성공/실패 [o]
     - 특정 가계부 복제 성공/실패 [o]
-    - 특정 가계부 url 생성 성공/실패
+    - 특정 가계부 url 생성 성공/실패 [o]
