@@ -12,12 +12,12 @@ urlpatterns = [
     ),
     path(
         'accountbook/<int:accountbook_id>',
-        AccountBookCopyCreateAPIView.as_view(),
-        name = "copy_accountbook",
-    ),
-    path(
-        'accountbook/<int:accountbook_id>',
         AccountBookViewSet.as_view({'patch':'update', 'get':'retrieve', 'delete':'destroy'}),
         name = "accountbook",
+    ),
+    path(
+        'accountbook/<int:accountbook_id>/copy',
+        AccountBookCopyCreateAPIView.as_view(),
+        name = "copy_accountbook",
     ),
 ]
