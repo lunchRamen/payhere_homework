@@ -6,6 +6,8 @@ from rest_framework.test import APIClient
 from .models import User
 
 from django.urls import reverse
+from freezegun import freeze_time
+import datetime
 
 
 class UserSignupTestCase(APITestCase):
@@ -86,6 +88,39 @@ class UserLogoutTestCase(APITestCase):
     def test_유저_로그아웃_성공(self):
         res = self.client.post('http://127.0.0.1:8000/api/users/logout/')
         self.assertEqual(res.status_code, 200)
+
+class UserTokenTestCase(APITestCase):
+    token = ""
+
+    def setUp(self):
+        self.user = User.objects.create(
+            email = "test@gmail.com"
+        )
+        self.user.set_password("asdff1234")
+        self.user.save()
+
+        data = {
+            "email":"test@gmail.com",
+            "password":"asdff1234"
+        }
+
+        res = self.client.post('http://127.0.0.1:8000/api/users/login/',data)
+        self.token = res.json()["access_token"]
+    
+    def test_접근토큰_시간만료_전_성공(self):
+        data = {
+            "token": self.token
+        }
+        res = self.client.post('http://127.0.0.1/api/users/token/verify/', data)
+        self. assertEqual(res.status_code , 200)
+    
+    def test_접근토큰_시간만료_후_실패(self):
+        data = {
+            "token": self.token
+        }
+        with freeze_time(datetime.datetime.now() + datetime.timedelta(hours=2)):
+            res = self.client.post('http://127.0.0.1/api/users/token/verify/', data)
+            self.assertEqual(res.status_code, 401)
 
 
 class AccountBookTestCase(APITransactionTestCase):
