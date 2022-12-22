@@ -139,6 +139,14 @@ requests = "*"
 requests-oauthlib = ">=0.3.0"
 
 [[package]]
+name = "django-crispy-forms"
+version = "1.14.0"
+description = "Best way to have Django DRY forms"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
 name = "django-extensions"
 version = "3.2.1"
 description = "Extensions for Django"
@@ -161,6 +169,14 @@ python-versions = ">=3.7"
 Django = ">=3.2"
 
 [[package]]
+name = "django-link-shortener"
+version = "0.5"
+description = "A simple Django Url Shortener."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "django-rest-framework"
 version = "0.1.0"
 description = "alias."
@@ -170,6 +186,109 @@ python-versions = "*"
 
 [package.dependencies]
 djangorestframework = "*"
+
+[[package]]
+name = "django-taggit"
+version = "3.1.0"
+description = "django-taggit is a reusable Django application for simple tagging."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
+name = "django-urlshortener"
+version = "2.0.0"
+description = "Django-URLShortener: Reusable URLShortener Application."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = "*"
+djangoadmin = "*"
+djangocontact = "*"
+djangotags = "*"
+djangotools = "*"
+
+[[package]]
+name = "djangoadmin"
+version = "2.2.8"
+description = "Djangoadmin: Django Reusable Admin Application."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = "*"
+django-crispy-forms = "*"
+django-filter = "*"
+djangorestframework = "*"
+djangorestframework-simplejwt = "*"
+djangotools = "*"
+pillow = "*"
+
+[[package]]
+name = "djangoarticle"
+version = "2.2.4"
+description = "Djangoarticle: Django Reusable app to Publish Articles."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = "*"
+django-crispy-forms = "*"
+django-filter = "*"
+django-taggit = "*"
+djangocomment = "*"
+djangorestframework = "*"
+djangorestframework-simplejwt = "*"
+djangotools = "*"
+pillow = "*"
+
+[[package]]
+name = "djangocomment"
+version = "2.2.2"
+description = "Djangocomment: Django Reusable Comment Application."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = "*"
+
+[[package]]
+name = "djangocontact"
+version = "2.2.3"
+description = "Djangocontact: Django Reusable Contact Application."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = "*"
+
+[[package]]
+name = "djangopost"
+version = "2.2.1"
+description = "Djangopost: Django Reusable app to Publish Posts."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = "*"
+django-crispy-forms = "*"
+django-filter = "*"
+django-taggit = "*"
+djangocomment = "*"
+djangorestframework = "*"
+djangorestframework-simplejwt = "*"
+djangotools = "*"
+pillow = "*"
 
 [[package]]
 name = "djangorestframework"
@@ -203,6 +322,39 @@ doc = ["Sphinx (>=1.6.5,<2)", "sphinx-rtd-theme (>=0.1.9)"]
 lint = ["flake8", "pep8", "isort"]
 python-jose = ["python-jose (==3.3.0)"]
 test = ["cryptography", "pytest-cov", "pytest-django", "pytest-xdist", "pytest", "tox"]
+
+[[package]]
+name = "djangotags"
+version = "2.2.2"
+description = "Djangocontact: Django Reusable Tags Application."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = "*"
+django-crispy-forms = "*"
+django-filter = "*"
+django-taggit = "*"
+djangoadmin = "*"
+djangoarticle = "*"
+djangocomment = "*"
+djangopost = "*"
+djangorestframework = "*"
+djangorestframework-simplejwt = "*"
+djangotools = "*"
+pillow = "*"
+
+[[package]]
+name = "djangotools"
+version = "2.2.2"
+description = "Djangotools: Django Reusable Feature Application."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = "*"
 
 [[package]]
 name = "drf-yasg"
@@ -348,6 +500,18 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "pillow"
+version = "9.3.0"
+description = "Python Imaging Library (Fork)"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+docs = ["furo", "olefile", "sphinx (>=2.4)", "sphinx-copybutton", "sphinx-issues (>=3.0.1)", "sphinx-removed-in", "sphinxext-opengraph"]
+tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "packaging", "pyroma", "pytest", "pytest-cov", "pytest-timeout"]
+
+[[package]]
 name = "pycodestyle"
 version = "2.10.0"
 description = "Python style guide checker"
@@ -387,6 +551,21 @@ crypto = ["cryptography (>=3.4.0)"]
 dev = ["sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface", "cryptography (>=3.4.0)", "pytest (>=6.0.0,<7.0.0)", "coverage[toml] (==5.0.4)", "pre-commit"]
 docs = ["sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
 tests = ["pytest (>=6.0.0,<7.0.0)", "coverage[toml] (==5.0.4)"]
+
+[[package]]
+name = "pyshorteners"
+version = "1.0.1"
+description = "A Python lib to wrap and consume the most used shorteners APIs"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+requests = "*"
+
+[package.extras]
+dev = ["pre-commit"]
+docs = ["sphinx"]
 
 [[package]]
 name = "python-dateutil"
@@ -534,7 +713,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "f587b67930637067b5d72927a715d0b5e8d56b6f816e8e7b62172b007642106b"
+content-hash = "37449339ce9261222d821190996b9878f760839be1466cde187a3930e8c81705"
 
 [metadata.files]
 asgiref = [
@@ -551,11 +730,22 @@ defusedxml = []
 dj-rest-auth = []
 django = []
 django-allauth = []
+django-crispy-forms = []
 django-extensions = []
 django-filter = []
+django-link-shortener = []
 django-rest-framework = []
+django-taggit = []
+django-urlshortener = []
+djangoadmin = []
+djangoarticle = []
+djangocomment = []
+djangocontact = []
+djangopost = []
 djangorestframework = []
 djangorestframework-simplejwt = []
+djangotags = []
+djangotools = []
 drf-yasg = []
 flake8 = []
 freezegun = []
@@ -569,10 +759,12 @@ mccabe = []
 mysqlclient = []
 oauthlib = []
 packaging = []
+pillow = []
 pycodestyle = []
 pycparser = []
 pyflakes = []
 pyjwt = []
+pyshorteners = []
 python-dateutil = [
     {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
     {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},

@@ -25,3 +25,5 @@ class AccountBookDestroySerializer(serializers.ModelSerializer):
     class Meta:
         model = AccountBook
         fields = '__all__'
+    
+    

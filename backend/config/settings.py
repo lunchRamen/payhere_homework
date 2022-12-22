@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
+    'shortener',
 ]
 
 MIDDLEWARE = [
@@ -173,3 +174,5 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
     'TOKEN_USER_CLASS': 'api.User',
 }
+
+SHORTENER_ENABLE_TEST_PATH = True

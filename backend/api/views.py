@@ -5,6 +5,8 @@ from rest_framework.generics import *
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.generics import CreateAPIView
+from rest_framework.views import APIView
+from shortener import shortener
 
 from .serializers import *
 from .exceptions import *
@@ -132,7 +134,12 @@ class AccountBookCopyCreateAPIView(CreateAPIView):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-        
 
-    
+class AccountBookUrlAPIView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
         
+    def get(self,request,*args,**kwargs):
+        original_url = "http://127.0.0.1:8000" + "/".join(request.get_full_path().split("/")[:-1])
+        convert_url = shortener.create(request.user, original_url)
+        redirect_url = "http://127.0.0.1:8000/s/"+convert_url
+        return Response(redirect_url)

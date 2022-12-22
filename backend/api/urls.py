@@ -1,6 +1,6 @@
 from django.urls import include, path
 
-from .views import AccountBookViewSet,AccountBookCopyCreateAPIView
+from .views import AccountBookViewSet,AccountBookCopyCreateAPIView,AccountBookUrlAPIView
 
 urlpatterns = [
     path('users/', include('dj_rest_auth.urls')),
@@ -20,4 +20,9 @@ urlpatterns = [
         AccountBookCopyCreateAPIView.as_view(),
         name = "copy_accountbook",
     ),
+    path(
+        'accountbook/<int:accountbook_id>/url',
+        AccountBookUrlAPIView.as_view(),
+        name = "url_accountbook",
+    )
 ]
