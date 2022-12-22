@@ -1,6 +1,6 @@
 # Create your tests here.
 # from django.test import TestCase
-from rest_framework.test import APITestCase
+from rest_framework.test import APITestCase,APITransactionTestCase
 # from rest_framework.response import Response
 from rest_framework.test import APIClient
 from .models import User
@@ -88,8 +88,9 @@ class UserLogoutTestCase(APITestCase):
         self.assertEqual(res.status_code, 200)
 
 
-class AccountBookTestCase(APITestCase):
+class AccountBookTestCase(APITransactionTestCase):
     token = ""
+    reset_sequences = True
 
     def setUp(self):
         self.user = User.objects.create(
@@ -149,6 +150,8 @@ class AccountBookTestCase(APITestCase):
         self.assertEqual(res.data.get("detail"), "가계부의 생성,수정은 0원이 넘어야 가능합니다.")
     
     def test_유저_가계부_리스트_성공(self):
+        for _ in range(5):
+            self.do_유저_가계부_더미데이터_생성()
         res = self.client.get(reverse('accountbooks'))
         self.assertEqual(res.status_code, 200)
     
@@ -169,7 +172,7 @@ class AccountBookTestCase(APITestCase):
             "money": 10000,
             "memo": "test2",
         }
-        res = self.client.patch(reverse('accountbook',kwargs={"accountbook_id":2}), data = data)
+        res = self.client.patch(reverse('accountbook',kwargs={"accountbook_id":1}), data = data)
         self.assertEqual(res.status_code, 200)
     
     def test_유저_특정_가계부_업데이트_실패_없는가계부(self):
@@ -178,6 +181,11 @@ class AccountBookTestCase(APITestCase):
             "money": 10000,
             "memo": "test2",
         }
-        res = self.client.patch(reverse('accountbook',kwargs={"accountbook_id":10}), data = data)
+        res = self.client.patch(reverse('accountbook',kwargs={"accountbook_id":2}), data = data)
         self.assertEqual(res.status_code, 400)
         self.assertEqual(res.data["detail"], "없는 가계부 조회는 불가합니다.")
+    
+    def test_유저_특정_가계부_삭제_성공(self):
+        self.do_유저_가계부_더미데이터_생성()
+        res = self.client.delete(reverse('accountbook', kwargs={'accountbook_id':1}))
+        self.assertEqual(res.status_code, 200)
