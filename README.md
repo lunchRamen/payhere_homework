@@ -4,6 +4,7 @@
     - 개발환경과 배포환경 모두 Django와 Mysql:5.7로 구현 및 테스트를 진행하도록 하였습니다
         - 개발환경에서 서버를 실행하고 싶은 경우
             - backend/mysql_settings.py파일을 만들고, 개인 mysql 서버 설정을 설정합니다.
+            - poetry install로 페이히어 과제 프로젝트의 개발환경을 만들어줍니다.
             - python backend/manage.py makemigrations, python backend/manage.py migrate를 진행합니다.
             - python backend/manage.py runserver로 서버를 실행합니다.
         - 개발환경에서 테스트를 진행하고 싶은 경우
@@ -31,6 +32,35 @@
         - updated_at
     - User와 AccountBook은 1:N 관계를 가지고 있습니다.
 
+    - User의 Mysql DDL
+        - CREATE TABLE `api_user` (
+        `id` bigint(20) NOT NULL AUTO_INCREMENT,
+        `password` varchar(128) COLLATE utf8mb4_bin NOT NULL,
+        `last_login` datetime(6) DEFAULT NULL,
+        `is_superuser` tinyint(1) NOT NULL,
+        `first_name` varchar(150) COLLATE utf8mb4_bin NOT NULL,
+        `last_name` varchar(150) COLLATE utf8mb4_bin NOT NULL,
+        `is_staff` tinyint(1) NOT NULL,
+        `is_active` tinyint(1) NOT NULL,
+        `date_joined` datetime(6) NOT NULL,
+        `email` varchar(254) COLLATE utf8mb4_bin NOT NULL,
+        `created_at` datetime(6) NOT NULL,
+        `updated_at` datetime(6) NOT NULL,
+        PRIMARY KEY (`id`),
+        UNIQUE KEY `email` (`email`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+    - AccountBook의 Mysql DDL
+        - CREATE TABLE `api_accountbook` (
+        `id` bigint(20) NOT NULL AUTO_INCREMENT,
+        `money` int(11) NOT NULL,
+        `memo` longtext COLLATE utf8mb4_bin,
+        `created_at` datetime(6) NOT NULL,
+        `updated_at` datetime(6) NOT NULL,
+        `user_id` bigint(20) NOT NULL,
+        PRIMARY KEY (`id`),
+        KEY `api_accountbook_user_id_f407b2ad_fk_api_user_id` (`user_id`),
+        CONSTRAINT `api_accountbook_user_id_f407b2ad_fk_api_user_id` FOREIGN KEY (`user_id`) REFERENCES `api_user` (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 
 - 개발 API
     - default url : api/
