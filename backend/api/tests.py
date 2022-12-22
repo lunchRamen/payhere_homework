@@ -224,3 +224,14 @@ class AccountBookTestCase(APITransactionTestCase):
         self.do_유저_가계부_더미데이터_생성()
         res = self.client.delete(reverse('accountbook', kwargs={'accountbook_id':1}))
         self.assertEqual(res.status_code, 200)
+
+    def test_유저_특정_가계부_복제_성공(self):
+        self.do_유저_가계부_더미데이터_생성()
+        res = self.client.post(reverse('copy_accountbook', kwargs={'accountbook_id':1}))
+        self.assertEqual(res.status_code , 201)
+    
+    def test_유저_특정_가계부_복제_실패_없는_가계부(self):
+        self.do_유저_가계부_더미데이터_생성()
+        res = self.client.post(reverse('copy_accountbook', kwargs={'accountbook_id':2}))
+        self.assertEqual(res.status_code, 400)
+        self.assertEqual(res.data["detail"], "없는 가계부 조회는 불가합니다.")
