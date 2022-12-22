@@ -145,7 +145,7 @@ class AccountBookTestCase(APITestCase):
             res = self.client.post(reverse('accountbooks'),data)
             return res.data
         do_유저_가계부_더미데이터_생성()
-        res = self.client.get('http://127.0.0.1:8000/api/accountbook/',{"pk":1})
+        res = self.client.get('http://127.0.0.1:8000/api/accountbook/',{"accountbook_id":1})
         self.assertEqual(res.status_code , 200)
     
     def test_유저_특정_가계부_조회_실패(self):
@@ -157,5 +157,6 @@ class AccountBookTestCase(APITestCase):
             res = self.client.post(reverse('accountbooks'),data)
             return res.data
         do_유저_가계부_더미데이터_생성()
-        res = self.client.get('http://127.0.0.1:8000/api/accountbook/',{"pk":2})
-        self.assertEqual(res.status_code , 200)
+        res = self.client.get(reverse('accountbook',kwargs={"accountbook_id":2}))
+        self.assertEqual(res.status_code , 400)
+        self.assertEqual(res.data.get("detail"), "없는 가계부 조회는 불가합니다.")
