@@ -123,6 +123,14 @@ class AccountBookTestCase(APITestCase):
         res = self.client.post(reverse('accountbooks'),data)
         self.assertEqual(res.status_code, 400)
     
+    def test_유저_가계부_생성_실패_돈_숫자X(self):
+        data = {
+            "money":'1q',
+            "memo": "test",
+        }
+        res = self.client.post(reverse('accountbooks'),data)
+        self.assertEqual(res.status_code, 400)
+    
     def test_유저_가계부_생성_실패_돈0원(self):
         data = {
             "money":0,
@@ -130,7 +138,7 @@ class AccountBookTestCase(APITestCase):
         }
         res = self.client.post(reverse('accountbooks'),data)
         self.assertEqual(res.status_code, 400)
-        self.assertEqual(res.data.get("detail"), "돈은 0원이 넘게 입력해주세요.")
+        self.assertEqual(res.data.get("detail"), "가계부의 생성,수정은 0원이 넘어야 가능합니다.")
     
     def test_유저_가계부_리스트_성공(self):
         res = self.client.get(reverse('accountbooks'))
