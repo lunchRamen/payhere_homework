@@ -69,9 +69,9 @@
     - users/login (GET) -> 로그인 [o]
     - users/logout (GET) -> 로그아웃 [o]
 
-    - users/accountbook (GET) -> user가 만든 가계부 리스트 반환. [o]
-    - users/accountbook (POST) -> user의 가계부 생성 [o]
-    - users/accountbook/{accountbook_id} (GET) -> user의 accountbook_id 가계부 조회 [o]
+    - accountbook (GET) -> user가 만든 가계부 리스트 반환. [o]
+    - accountbook (POST) -> user의 가계부 생성 [o]
+    - accountbook/{accountbook_id} (GET) -> user의 accountbook_id 가계부 조회 [o]
     - accountbook/{accountbook_id} (PATCH) -> user의 accountbook_id 가계부 수정 [o]
     - accountbook/{accountbook_id} (DELETE) -> user의 accountbook_id 가계부 삭제 [o]
     - accountbook/{accountbook_id}/copy (POST) -> user의 accountbook_id 데이터와 동일한 가계부 복제 후 저장. [o]
