@@ -1,6 +1,6 @@
 from django.urls import include, path
 
-from .views import AccountBookViewSet,AccountBookCopyCreateAPIView,AccountBookUrlAPIView
+from .views import AccountBookCopyCreateAPIView, AccountBookUrlAPIView, AccountBookViewSet
 
 urlpatterns = [
     path('users/', include('dj_rest_auth.urls')),
