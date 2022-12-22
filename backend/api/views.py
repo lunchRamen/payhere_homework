@@ -137,6 +137,13 @@ class AccountBookCopyCreateAPIView(CreateAPIView):
 
 class AccountBookUrlAPIView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    
+    def get_object(self,accountbook_id):
+        try:
+            obj = AccountBook.objects.get(pk = self.kwargs["accountbook_id"])
+        except Exception:
+            raise NoAccountBook
+        return obj
         
     def get(self,request,*args,**kwargs):
         original_url = "http://127.0.0.1:8000" + "/".join(request.get_full_path().split("/")[:-1])

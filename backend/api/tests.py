@@ -6,6 +6,7 @@ from django.urls import reverse
 from freezegun import freeze_time
 # from rest_framework.response import Response
 from rest_framework.test import APIClient, APITestCase, APITransactionTestCase
+from shortener import shortener
 
 from .models import User
 
@@ -235,3 +236,39 @@ class AccountBookTestCase(APITransactionTestCase):
         res = self.client.post(reverse('copy_accountbook', kwargs={'accountbook_id':2}))
         self.assertEqual(res.status_code, 400)
         self.assertEqual(res.data["detail"], "없는 가계부 조회는 불가합니다.")
+    
+    def test_유저_특정_가계부_URL_반환_성공(self):
+        self.do_유저_가계부_더미데이터_생성()
+        res = self.client.get(reverse('url_accountbook', kwargs={'accountbook_id':1}))
+        self.assertEqual(res.status_code, 200)
+    
+    def test_유저_특정_가계부_URL_접속_성공(self):
+        self.do_유저_가계부_더미데이터_생성()
+        url_res = self.client.get(reverse('url_accountbook', kwargs={'accountbook_id':1}))
+
+        res = self.client.get(shortener.expand(url_res.data.split("/")[-1]))
+
+        self.assertEqual(res.status_code,200)
+        self.assertEqual(res.data.get('id'), 1)
+        self.assertEqual(res.data.get('money'),1000)
+        self.assertEqual(res.data.get('memo'),'test')
+    
+    def test_유저_특정_가계부_URL_접속_실패_없는_가계부(self):
+        self.do_유저_가계부_더미데이터_생성()
+        url_res = self.client.get(reverse('url_accountbook', kwargs={'accountbook_id':2}))
+        res = self.client.get(shortener.expand(url_res.data.split("/")[-1]))
+
+        self.assertEqual(res.status_code, 400)
+        self.assertEqual(res.data["detail"], "없는 가계부 조회는 불가합니다.")
+    
+    def test_유저_특정_가계부_URL_접속_실패_시간만료(self):
+        self.do_유저_가계부_더미데이터_생성()
+        url_res = self.client.get(reverse('url_accountbook', kwargs={'accountbook_id':1}))
+
+        
+        with freeze_time(datetime.datetime.now() + datetime.timedelta(seconds=4000)):
+            with self.assertRaises(PermissionError):
+                self.client.get(shortener.expand(url_res.data.split("/")[-1]))
+            
+
+
