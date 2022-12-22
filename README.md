@@ -72,10 +72,10 @@
     - users/accountbook (GET) -> user가 만든 가계부 리스트 반환. [o]
     - users/accountbook (POST) -> user의 가계부 생성 [o]
     - users/accountbook/{accountbook_id} (GET) -> user의 accountbook_id 가계부 조회 [o]
-    - users/accountbook/{accountbook_id} (PATCH) -> user의 accountbook_id 가계부 수정 [o]
-    - users/accountbook/{accountbook_id} (DELETE) -> user의 accountbook_id 가계부 삭제 [o]
-    - users/accountbook/{accountbook_id}/copy (POST) -> user의 accountbook_id 데이터와 동일한 가계부 복제 후 저장. [o]
-    - users/accountbook/{accountbook_id}/url (GET) -> user의 account_id 가계부를 볼수 있는 url링크 조회. (url링크는 특정시간 후 만료.) [o]
+    - accountbook/{accountbook_id} (PATCH) -> user의 accountbook_id 가계부 수정 [o]
+    - accountbook/{accountbook_id} (DELETE) -> user의 accountbook_id 가계부 삭제 [o]
+    - accountbook/{accountbook_id}/copy (POST) -> user의 accountbook_id 데이터와 동일한 가계부 복제 후 저장. [o]
+    - accountbook/{accountbook_id}/url (GET) -> user의 account_id 가계부를 볼수 있는 url링크 조회. (url링크는 특정시간 후 만료.) [o]
 
 - 테스트 API
     - 회원가입 성공/실패 [o]
