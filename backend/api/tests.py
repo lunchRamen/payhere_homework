@@ -106,6 +106,14 @@ class AccountBookTestCase(APITestCase):
         res = self.client.post('http://127.0.0.1:8000/api/users/login/',data)
         self.token = res.json()["access_token"]
         self.client.credentials(HTTP_AUTHORIZATION = "Bearer " + self.token)
+
+    def do_유저_가계부_더미데이터_생성(self):
+        data = {
+            "money": 1000,
+            "memo": "test",
+        }
+        res = self.client.post(reverse('accountbooks'),data)
+        return res.data
     
     def test_유저_가계부_생성_성공(self):
         data = {
@@ -145,26 +153,31 @@ class AccountBookTestCase(APITestCase):
         self.assertEqual(res.status_code, 200)
     
     def test_유저_특정_가계부_조회_성공(self):
-        def do_유저_가계부_더미데이터_생성():
-            data = {
-                "money": 1000,
-                "memo": "test",
-            }
-            res = self.client.post(reverse('accountbooks'),data)
-            return res.data
-        do_유저_가계부_더미데이터_생성()
+        self.do_유저_가계부_더미데이터_생성()
         res = self.client.get('http://127.0.0.1:8000/api/accountbook/',{"accountbook_id":1})
         self.assertEqual(res.status_code , 200)
     
     def test_유저_특정_가계부_조회_실패(self):
-        def do_유저_가계부_더미데이터_생성():
-            data = {
-                "money": 1000,
-                "memo": "test",
-            }
-            res = self.client.post(reverse('accountbooks'),data)
-            return res.data
-        do_유저_가계부_더미데이터_생성()
+        self.do_유저_가계부_더미데이터_생성()
         res = self.client.get(reverse('accountbook',kwargs={"accountbook_id":2}))
         self.assertEqual(res.status_code , 400)
         self.assertEqual(res.data.get("detail"), "없는 가계부 조회는 불가합니다.")
+
+    def test_유저_특정_가계부_업데이트_성공(self):
+        self.do_유저_가계부_더미데이터_생성()
+        data = {
+            "money": 10000,
+            "memo": "test2",
+        }
+        res = self.client.patch(reverse('accountbook',kwargs={"accountbook_id":2}), data = data)
+        self.assertEqual(res.status_code, 200)
+    
+    def test_유저_특정_가계부_업데이트_실패_없는가계부(self):
+        self.do_유저_가계부_더미데이터_생성()
+        data = {
+            "money": 10000,
+            "memo": "test2",
+        }
+        res = self.client.patch(reverse('accountbook',kwargs={"accountbook_id":10}), data = data)
+        self.assertEqual(res.status_code, 400)
+        self.assertEqual(res.data["detail"], "없는 가계부 조회는 불가합니다.")
