@@ -6,7 +6,8 @@
             - backend/mysql_settings.py파일을 만들고, 개인 mysql 서버 설정을 설정합니다.
             - python backend/manage.py makemigrations, python backend/manage.py migrate를 진행합니다.
             - python backend/manage.py runserver로 서버를 실행합니다.
-        - 개발환경에서 테스트를 진행하고 싶은 경우,
+        - 개발환경에서 테스트를 진행하고 싶은 경우
+            - python backend/manage.py test api.tests를 실행합니다.
 
         - 배포환경에서 서버를 실행하고 싶은 경우, docker-compose up --build를 실행합니다.
         - 배포환경에서 테스트를 진행하고 싶은 경우,

@@ -1,13 +1,13 @@
 # Create your tests here.
 # from django.test import TestCase
-from rest_framework.test import APITestCase,APITransactionTestCase
-# from rest_framework.response import Response
-from rest_framework.test import APIClient
-from .models import User
+import datetime
 
 from django.urls import reverse
 from freezegun import freeze_time
-import datetime
+# from rest_framework.response import Response
+from rest_framework.test import APIClient, APITestCase, APITransactionTestCase
+
+from .models import User
 
 
 class UserSignupTestCase(APITestCase):
