@@ -18,3 +18,9 @@ class MoneyZero(APIException):
     status_code = status.HTTP_400_BAD_REQUEST
     default_detail = "돈은 0원이 넘게 입력해주세요."
     default_code = "NOT_ALLOW_MONEY_0"
+
+
+class NoAccountBook(APIException):
+    status_code = status.HTTP_400_BAD_REQUEST
+    default_detail = "없는 가계부 조회는 불가합니다."
+    default_code = "NO_ACCOUNTBOOK"
