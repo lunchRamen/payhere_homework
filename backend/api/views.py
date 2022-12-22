@@ -4,8 +4,9 @@ from rest_framework import permissions, status
 from rest_framework.generics import *
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.generics import CreateAPIView
 
-from .account_book_serializer import *
+from .serializers import *
 from .exceptions import *
 from .models import AccountBook
 
@@ -103,6 +104,34 @@ class AccountBookViewSet(ModelViewSet):
         serializer = self.get_serializer(instance)
         self.perform_destroy(instance)
         return Response(serializer.data, status = status.HTTP_200_OK)
+    
+
+class AccountBookCopyCreateAPIView(CreateAPIView):
+    queryset = AccountBook.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+    lookup_field='accountbook_id'
+    serializer_class = AccountBookCreateSerializer
+
+    def get_object(self):
+        try:
+            obj = AccountBook.objects.get(pk = self.kwargs["accountbook_id"])
+        except Exception:
+            raise NoAccountBook
+        return obj
+
+    def create(self, request, *args, **kwargs):
+        instance = self.get_object()
+        data = {
+            "money": instance.money,
+            "memo": instance.memo,
+            "user": instance.user.id
+        }
+        serializer = self.get_serializer(data = data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
         
 
     
